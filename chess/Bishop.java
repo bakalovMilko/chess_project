@@ -12,7 +12,7 @@ public class Bishop extends Figura{
    public boolean movement(Duska x, Pole nachalo, Pole krai) {
 	   
 		if(Math.abs(nachalo.x-krai.x) == Math.abs(nachalo.y-krai.y) ) {
-		super.movement(x, nachalo, krai);
+			return super.movement(x, nachalo, krai);
 		
 	    }return false;
    }

@@ -13,7 +13,7 @@ public class Queen extends Figura{
 		
 		  if((Math.abs(nachalo.x-krai.x)>0 && Math.abs(nachalo.y-krai.y)==0 ) || (Math.abs(nachalo.x-krai.x)==0 && Math.abs(nachalo.y-krai.y)>0) || 
 				  Math.abs(nachalo.x-krai.x) == Math.abs(nachalo.y-krai.y )) {
-		  super.movement(x, nachalo, krai);
+			  return super.movement(x, nachalo, krai);
 		
 	      }return false;
     }

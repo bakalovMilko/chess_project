@@ -16,17 +16,17 @@ class ChessPanel extends JPanel {
       int height = this.getHeight()/8;
 
       for(int i = 0; i < 8; i++){
-        for(int j = 0; j < 8; j++){
+        for(int j = 7; j >= 0; j--){
           if((i+j)%2==1) {
           g.fillRect(i*width, j*height, width, height);
           }
         }
       }
       for(int i = 0; i < 8; i++){
-        for(int j = 0; j < 8; j++){
+        for(int j = 7; j >= 0; j--){
           try {
         	if(duska.d[i][j].f.color != 2) {  
-			g.drawImage(duska.d[i][j].getImage(), i*width, j*height, null);
+			g.drawImage(duska.d[i][j].getImage(), i*width+3, j*height+5, null);
         	}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

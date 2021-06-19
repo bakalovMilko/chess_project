@@ -11,14 +11,14 @@ public class Pawn extends Figura {
 	  public boolean movement(Duska x, Pole nachalo, Pole krai) {
 		  
 		  
-		if(this.color == 1)	{
-		  if(nachalo.y-krai.y<0 && (Math.abs(nachalo.x-krai.x)==0  || (Math.abs(nachalo.x-krai.x)==1 && krai.f.color ==0 ))) {
-		  super.movement(x, nachalo, krai);
+		if(this.color == 0)	{
+		  if(nachalo.y-krai.y<0 && (Math.abs(nachalo.x-krai.x)==0  || (Math.abs(nachalo.x-krai.x)==1 && krai.f.color ==1 ))) {
+			  return super.movement(x, nachalo, krai);
 		 }
 		}
-		else if(this.color == 0)	{
-			  if(nachalo.y-krai.y>0 && (Math.abs(nachalo.x-krai.x)==0  || (Math.abs(nachalo.x-krai.x)==1 && krai.f.color ==1 ))) {
-				  super.movement(x, nachalo, krai);
+		else if(this.color == 1)	{
+			  if(nachalo.y-krai.y>0 && (Math.abs(nachalo.x-krai.x)==0  || (Math.abs(nachalo.x-krai.x)==1 && krai.f.color ==0 ))) {
+				  return super.movement(x, nachalo, krai);
 				}
 	      }
 		return false;

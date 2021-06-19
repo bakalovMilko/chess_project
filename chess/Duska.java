@@ -5,10 +5,21 @@ public class Duska {
 	Duska() {
 		for(int i = 0; i < 8; i++) {
 			for(int j = 0; j < 8; j++) {
-				d[i][j] = new Pole(new Prazna(), i, j);
+				d[i][j] = new Pole(i, j);
 			}
 		}
-    
+		for(int i = 0; i<8; i++) {
+			//d[i][1].remove();
+			d[i][1].f = new Pawn(0);
+			//d[i][6].remove();
+			d[i][6].f = new Pawn(1);
+			//d[3][5].f = new Pawn(0);
+		}
+		//d[4][0].remove();
+		d[4][0].f = new King(0);
+		//d[4][7].remove();
+		d[4][7].f = new King(1);
+		
 	}
 	
 	
@@ -23,7 +34,7 @@ public class Duska {
 		
 		//check if the path is clear
 		if(start.x == end.x && start.y == end.y)
-			return true;
+			return false;
 		else if(start.x == end.x && start.y < end.y) {
 			for(int i = start.y + 1; i<end.y; i++) {
 				if(d[start.x][i].f.color != 2)
@@ -32,7 +43,7 @@ public class Duska {
 			return true;
 		}
 		else if(start.x == end.x && start.y > end.y) {
-			for(int i = start.y + 1; i<end.y; i++) {
+			for(int i = end.y + 1; i<start.y; i++) {
 				if(d[start.x][i].f.color != 2)
 					return false;
 			}
@@ -56,8 +67,8 @@ public class Duska {
 			int difX = (int) ((end.x - start.x)/Math.sqrt((end.x - start.x)*(end.x - start.x)));
 			int difY = (int) ((end.y - start.y)/Math.sqrt((end.y - start.y)*(end.y - start.y)));
 			
-			int i = start.x;
-			int j = start.y;
+			int i = start.x+difX;
+			int j = start.y+difY;
 			while(i != end.x && j != end.y) {
 				if(d[i][j].f.color != 2)
 					return false;
