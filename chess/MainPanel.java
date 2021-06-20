@@ -128,9 +128,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
+
 import java.awt.TextField;
 
 class MainPanel extends JPanel {
@@ -141,6 +145,7 @@ class MainPanel extends JPanel {
   int kingCounter = 0;
   int moveCounter = 1;
   Pole nachalo = null;
+  MoveRecorder mr = new MoveRecorder();
 
 	MainPanel(){
 		setBackground(Color.GRAY);
@@ -190,11 +195,20 @@ class MainPanel extends JPanel {
 					public void actionPerformed(ActionEvent e) {
 						String gameName = answer.getText();
 						try {
-						      File file = new File("src\\Chess Games");
+						      File file = new File("src\\chess\\Chess Games");
 						      boolean dirCreated = file.mkdir();
-						      File myObj = new File("src\\Chess Games\\"+gameName+".txt");
+						      File myObj = new File("src\\chess\\Chess Games\\"+gameName+".txt");
 						      if (myObj.createNewFile()) {
 						        question.setText("File created: " + myObj.getName());
+						        try {
+						            FileWriter myWriter = new FileWriter("src\\chess\\Chess Games\\"+gameName+".txt");
+						            myWriter.write(mr.finalGame());
+						            myWriter.close();
+						            System.out.println("Successfully wrote to the file.");
+						          } catch (IOException h) {
+						            System.out.println("An error occurred.");
+						            h.printStackTrace();
+						          }
 						      } else {
 						    	question.setText("File already exists.");
 						      }
@@ -211,6 +225,10 @@ class MainPanel extends JPanel {
 		JButton btnLoadGame = new JButton("Load Game");
 		btnLoadGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JOptionPane loadGamePane = new JOptionPane();
+				String gameToLoad =(String) loadGamePane.showInputDialog(null, 
+						"Choose a game to load", "Load Game", 2, null, new File("src\\chess\\Chess Games").list(), "Choice");
+				Scanner sc = new Scanner("src\\chess\\Chess Games\\"+gameToLoad);
 				
 			}
 		});
@@ -232,7 +250,9 @@ class MainPanel extends JPanel {
 		        if(nachalo == null && moveCounter%2 == cp.duska.d[x][y].f.color ) {
 		        	//System.out.println("zachitam");	
 		        nachalo = cp.duska.d[x][y];
-		        System.out.println(nachalo.x+" "+nachalo.y + " Nachalo");
+		        mr.recordFirstMove(nachalo);
+		        //movesPlayed.setText(mr.finalGame());
+		        //System.out.println(nachalo.x+" "+nachalo.y + " Nachalo");
 		        }
 		        else if(moveCounter%2 == nachalo.f.color){
 		        	
@@ -241,7 +261,8 @@ class MainPanel extends JPanel {
 		        	//cp.duska.d[x][y].f =
 		        	System.out.println(cp.duska.putqChistLiE(nachalo, krai));
 		        	if(nachalo.f.movement(cp.duska, nachalo, krai)) {
-		        		System.out.println("vleznah");
+		        		mr.recordSecondMove(krai);
+		        		//System.out.println("vleznah");
 		 		       krai.f = nachalo.f;
 				       nachalo.f = new Prazna();
 				       cp.repaint();
@@ -263,13 +284,18 @@ class MainPanel extends JPanel {
 				       
 				       else {
 				    	   //this.win(moveCounter%2);
+				    	   //mr.removeFirstMove();
 				       }
 				    
+		        	}
+		        	else {
+		        		mr.removeFirstMove();
 		        	}
 		        	
 		        	nachalo = null;
 		        }
 		        //nachalo = null;
+		        movesPlayed.setText(mr.finalGame());
 		    }
 
 			@Override
@@ -296,7 +322,7 @@ class MainPanel extends JPanel {
 				
 			}
 		});
-		              
+		
 		//public void win() {
 			
 		//}

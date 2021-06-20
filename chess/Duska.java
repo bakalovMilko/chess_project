@@ -15,10 +15,22 @@ public class Duska {
 			d[i][6].f = new Pawn(1);
 			//d[3][5].f = new Pawn(0);
 		}
-		//d[4][0].remove();
 		d[4][0].f = new King(0);
-		//d[4][7].remove();
 		d[4][7].f = new King(1);
+		d[0][0].f = new Rook(0);
+		d[7][0].f = new Rook(0);
+		d[0][7].f = new Rook(1);
+		d[7][7].f = new Rook(1);
+		d[2][0].f = new Bishop(0);
+		d[5][0].f = new Bishop(0);
+		d[2][7].f = new Bishop(1);
+		d[5][7].f = new Bishop(1);
+		d[1][0].f = new Knight(0);
+		d[6][0].f = new Knight(0);
+		d[1][7].f = new Knight(1);
+		d[6][7].f = new Knight(1);
+		d[3][0].f = new Queen(0);
+		d[3][7].f = new Queen(1);
 		
 	}
 	
