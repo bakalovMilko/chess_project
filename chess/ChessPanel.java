@@ -1,9 +1,11 @@
 package chess;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.io.IOException;
 
 import javax.swing.JPanel;
+
 
 class ChessPanel extends JPanel {
   Duska duska = new Duska();
@@ -18,6 +20,7 @@ class ChessPanel extends JPanel {
       for(int i = 0; i < 8; i++){
         for(int j = 7; j >= 0; j--){
           if((i+j)%2==1) {
+          g.setColor(new Color(164242));
           g.fillRect(i*width, j*height, width, height);
           }
         }

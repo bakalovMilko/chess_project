@@ -1,10 +1,72 @@
 package chess;
 
+import java.awt.Point;
+
 public class MoveRecorder {
 	String game;
 	String kolona, figura, red;
 	MoveRecorder(){
 		game = "";
+	}
+	public String reverseTraspose(String x, String y) {
+		String xy = "";
+		switch(x) {
+		case "a":
+			xy += "0";
+			break;
+		case "b":
+			xy += "1";
+			break;
+		case "c":
+			xy += "2";
+			break;
+		case "d":
+			xy += "3";
+			break;
+		case "e":
+			xy += "4";
+			break;
+		case "f":
+			xy += "5";
+			break;
+		case "g":
+			xy += "6";
+			break;
+		case "h":
+			xy += "7";
+			break;
+			
+		}
+		
+		switch(y) {
+		case "8":
+			xy += "0";
+			break;
+		case "7":
+			xy += "1";
+			break;
+		case "6":
+			xy += "2";
+			break;
+		case "5":
+			xy += "3";
+			break;
+		case "4":
+			xy += "4";
+			break;
+		case "3":
+			xy += "5";
+			break;
+		case "2":
+			xy += "6";
+			break;
+		case "1":
+			xy += "7";
+			break;
+			
+		}
+		return xy;
+		//Pole d[Integer.parseInt(mr.xy.charAt(0))][Integer.parseInt(mr.xy.charAt(1))]
 	}
 	public void transpose(Pole p) {
 		switch (p.x) {
